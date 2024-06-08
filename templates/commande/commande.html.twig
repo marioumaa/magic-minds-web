@@ -1,0 +1,71 @@
+{% extends 'base1.html.twig' %}
+
+{% block body %}
+    {# Define a template URL with a placeholder for commandId #}
+    <script>
+        var factureUrlTemplate = '{{ path('app_facture', {'commandId': '__commandId__'}) }}';
+    </script>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <input type="text" id="searchInput" placeholder="Search by ID..." class="form-control mb-3">
+               
+            </div>
+            <div class="col-12">
+                <table class="table table-bordered" id="commandsTable">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Total Price</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Results will be displayed here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function fetchCommands(term = '', price = '') {
+                $.ajax({
+                    url: '{{ path('search_commande') }}',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        term: term,
+                        price: price,
+                    },
+                    success: function(commands) {
+                        $('#commandsTable tbody').empty();
+                        $.each(commands, function(i, item) {
+                            // Replace the placeholder in the URL template with the actual commandId
+                            var itemFactureUrl = factureUrlTemplate.replace('__commandId__', item.id);
+
+                            var row = '<tr>' +
+                                '<td>' + item.id + '</td>' +
+                                '<td>$' + item.totalprice + '</td>' +
+                                '<td><button type="button" class="btn btn-primary"><a href="' + itemFactureUrl + '" class="text-white"><i class="far fa-eye"></i></a></button></td>' +
+                                '</tr>';
+                            $('#commandsTable tbody').append(row);
+                        });
+                    }
+                });
+            }
+
+            $('#searchInput, #priceInput').on('keyup change', function() {
+                fetchCommands($('#searchInput').val(), $('#priceInput').val());
+            });
+
+            // Initial fetch of commands
+            fetchCommands();
+        });
+
+    </script>
+
+{% endblock %}

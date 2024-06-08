@@ -1,0 +1,137 @@
+{% extends 'Admin/base.html.twig' %}
+      {% block title %}
+      {% endblock %}
+
+        {% block style %}
+            <!-- Styles Bootstrap (CSS) -->
+
+            <!-- Axentix CSS minified version -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axentix@2.2.1/dist/axentix.min.css">
+            <!-- Scripts Bootstrap (JavaScript) -->
+
+        {% endblock %}
+
+
+
+  {% block content %}
+
+      <div class="container mt-5">
+          <div class="row-cols-lg-auto">
+              <div class="col-md-12">
+                  <h2 class="text-center mb-4">User Management</h2>
+                  <div class="form-inline mb-3">
+                      <a class="btn bgOrange blColor btn-small mr-auto" href="{{ path('user.add') }}">Add User</a>
+                      <button class="btn bg-success blColor btn-small ml-auto" onclick="handleAdd()">Export data csv</button>
+                  </div>
+                  <!-- Filtrage et Tri -->
+
+                  <div class="form-inline mb-3 ">
+                      {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+                      {{ form_row(form.mots, {'attr': {'class': 'form-control mr-2',
+                          'id' : 'searchInput'
+                      }}) }}
+                      {{ form_row(form.Rechercher, {'attr': {'class': 'btn bgOrange blColor btn-small mr-auto',
+                      }}) }}
+
+                      {{ form_end(form) }}
+{#                      <div class="form-inline mb-3">#}
+                          <select class="form-control ml-auto  mr-2">
+                              <option value="">Option 1</option>
+                              <option value="">Option 2</option>
+                              <option value="">Option 3</option>
+                          </select>
+                          <button class="btn bgOrange btn-small blColor" onclick="handleFilter()">Filter</button>
+{#                      </div>#}
+                  </div>
+            <div class="table-responsive">
+                  <table class="table table-striped ">
+                      <thead class="table-light">
+                      <tr>
+                          <th scope="col">#</th>
+                          <th scope="col" >FirstName  <i class="fa fa-sort" aria-hidden="true"></i></th>
+                          <th scope="col">LastName <i class="fa fa-sort" aria-hidden="true"></i></th>
+                          <th scope="col">Gender  <i class="fa fa-sort" aria-hidden="true"></i></th>
+                          <th scope="col">Active</th>
+                          <th scope="col">Action</th>
+                      </tr>
+                      </thead>
+                      <tbody id="tableBody">
+                      <!-- Data rows will be inserted here dynamically -->
+                      {% for i in users %}
+                      <tr>
+                          <td>1</td>
+                          <td>{{ i.firstName }}</td>
+                          <td>{{ i.lastName }}</td>
+                          <td>{{ i.gender }}</td>
+                          <td>
+
+                              <label class="form-switch mt-2">
+
+                                  <input type="checkbox" {{ (i.active)? 'checked' : '' }}
+                                  data-id="{{ i.id }}"
+                                  />
+                                  <span class="form-slider"></span>
+
+                              </label>
+                          </td>
+                          <td>
+                              <a class="btn bg-info blColor btn-small btn-sm" href="{{ path('user.show',{'id': i.id}) }}">Show</a>
+                              <a class="btn bg-success blColor btn-small btn-sm" href="{{ path('user.add',{'id': i.id}) }}">Edit</a>
+
+
+                              <a href="{{ path('user.delete',{'id': i.id}) }}" class="btn btn-danger btn-small btn-sm" >Delete</a>
+                          </td>
+                      </tr>
+                   {% endfor %}
+                      </tbody>
+                  </table>
+            </div>
+                  <nav aria-label="Page navigation">
+                      <ul class="pagination justify-content-center pagination-small">
+                          <li class="page-item">
+                              <a class="page-link" href="#" aria-label="Previous">
+                                  <span aria-hidden="true">&laquo;</span>
+                                  <span class="sr-only">Previous</span>
+                              </a>
+                          </li>
+                          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                          <li class="page-item"><a class="page-link" href="#">2</a></li>
+                          <!-- Ajouter plus de pages ici si nécessaire -->
+                          <li class="page-item">
+                              <a class="page-link" href="#" aria-label="Next">
+                                  <span aria-hidden="true">&raquo;</span>
+                                  <span class="sr-only">Next</span>
+                              </a>
+                          </li>
+                      </ul>
+                  </nav>
+              </div>
+          </div>
+      </div>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+ {% block js %}
+     <script>
+         window.onload = () => {
+             let modal = new Axentix.Modal('#modal-example');
+             let active = document.querySelectorAll("[type=checkbox]");
+             for(let bouton of active){
+                 bouton.addEventListener("click",function (){
+                     let xmlHttp = new XMLHttpRequest();
+                     xmlHttp.open("get",`/user/activer/${this.dataset.id}`)
+                     xmlHttp.send()
+                 });
+             }
+         }
+     </script>
+     <!-- Axentix JS minified version -->
+     <script src="https://cdn.jsdelivr.net/npm/axentix@2.2.1/dist/axentix.min.js"></script>
+ {% endblock %}

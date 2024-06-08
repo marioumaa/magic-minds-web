@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <table style="width:100%; border:none">
+        <tr>
+                <p style="margin-left: 20px ;">{{date|date('Y-m-d H:i:s')}}</p>
+        </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <h2 style="text-align: center; color:#103741">Classes Details</h2>
+            </td>
+        </tr>
+        {% for c in categories %}
+        <tr>
+            <td colspan="3">
+                <table style="font-family: Arial, Helvetica, sans-serif;">
+                    <tr>
+                        <td>Title :</td>
+                        <td>{{c.titre}}</td>
+                    </tr>
+                    <tr>
+                        <td>Description :</td>
+                        <td>{{c.description}}</td>
+                    </tr>
+                    <tr>
+                        <td>Number of courses :</td>
+                        <td>{{c.nbrCours}}</td>
+                    </tr>
+                    <tr>
+                        <td>Number of chapitre :</td>
+                        <td>{{c.nbrChapitre}}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <table style="width: 100%;" border="1 solid">
+                        <tr>
+                            <th><h4>Title</h4></th>
+                            <th><h4>Esteamed periode</h4></th>
+                            <th><h4>Number of chapters</h4></th>
+                        </tr>
+                        {% for co in course.getcourses(c.id) %}
+                        <tr>
+                            <td align="center">{{co.titre}}</td>
+                            <td align="center">{{co.duree}}</td>
+                            <td align="center">{{co.nbChapitre}}</td>
+                        </tr>
+                        {% endfor %}
+                </table>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+{% extends 'base1.html.twig' %}
+{% block title %} Courses list {% endblock %}
+{% block navimg %}
+{% endblock %}
+{% block body %}
+<div class="container-xxl bg-white py-5">
+    <div  class="row">
+        {% for cl in courslist %}
+            <div style="margin-bottom:40px" class="col-lg-4">
+                <div style="border: 2px solid #103741; border-radius: 20px ; width: 400px; height:200px ;">
+                    <table>
+                        <tr></tr>
+                        <tr>
+                            <td><h3 style="margin-left:20px; margin-right:100px; color:#369669" class="mb-1 mt-1">{{cl.titre}}</h3></td>
+                            <td><h6 style="margin-right:4px;" class="mb-1 mt-1">{{cl.duree}} semaines</h6></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><p style="color:black ;margin:20px" class="fs-7">{{cl.description}}</p></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

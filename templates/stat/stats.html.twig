@@ -1,0 +1,48 @@
+{% extends 'Admin/base.html.twig' %}
+
+{% block content %}
+
+<div class="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+
+                        <h4 class="page-title">Statistiques des questions</h4>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contenu de la vue des statistiques -->
+            <div class="row" style="padding-left: 500px">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Répartition des questions par son  type:enfant[rouge] ou parent[vert]</h5>
+                            <canvas id="reclamationChart" width="400" height="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin du contenu de la vue des statistiques -->
+            
+        </div>
+    </div>
+</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+<script>
+    let reclamationCanvas = document.querySelector("#reclamationChart");
+    let reclamationChart = new Chart(reclamationCanvas, {
+        type: 'pie',
+        data: {
+            labels: {{ recColor|raw }},
+            datasets: [{
+                label: 'Nombre de réclamations par type',
+                data: {{ recCount|raw }},
+                backgroundColor: {{ recColor|raw }},
+            }]
+        }
+    });
+</script>
+{% endblock %}
+

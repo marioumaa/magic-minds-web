@@ -1,0 +1,67 @@
+{% extends 'base1.html.twig' %}
+{% block navimg %}
+{% endblock %}
+{% block body %}
+<style>
+    .quiz-square {
+        width: 200px;
+        height: 200px;
+        background-color: #FFF5F3;
+        /* Utilisation de la couleur de fond spécifiée */
+        border: 1px solid #103741;
+        /* Utilisation de la couleur de la bordure spécifiée */
+        border-radius: 10px;
+        margin: 10px;
+        padding: 20px;
+        display: inline-block;
+        text-decoration: none;
+        /* Supprimer le soulignement du texte */
+        color: #FE5D37;
+        /* Utilisation de la couleur du texte spécifiée */
+    }
+
+    .quiz-square:hover {
+        background-color: #FE5D37;
+        /* Changer la couleur de fond au survol */
+    }
+
+    .quiz-square h3 {
+        text-align: center;
+    }
+
+    .btn-primary {
+        background-color: #369669;
+        /* Utilisation d'une couleur différente pour le bouton */
+        border-color: #369669;
+    }
+
+    .btn-primary:hover {
+        background-color: #369669;
+        /* Maintenir la même couleur de fond au survol */
+        border-color: #369669;
+    }
+
+    .list-quiz {
+        display: grid;
+        width: 80%;
+        margin: 0 auto;
+        grid-template-columns: repeat(3, 1fr);
+
+    }
+</style>
+<h1 class="text-center display-3 my-3">List of Quizzes</h1>
+<div class="list-quiz">
+    {% for quiz in quiz %}
+    <div class="">
+        <a href="{{ path('showquizzid', {'id': quiz.id}) }}" class="quiz-square shadow-sm">
+            <h3>{{ quiz.titre }}</h3>
+        </a>
+    </div>
+    {% endfor %}
+
+</div>
+<center>
+    <a href="{{ path('addquizz') }}" class="btn btn-primary w-25 mx-auto">Add a Quiz</a>
+</center>
+
+{% endblock %}

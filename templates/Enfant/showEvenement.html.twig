@@ -1,0 +1,219 @@
+{% extends 'base1.html.twig' %}
+{% block navimg %}
+{% endblock %}
+{% block body %}
+
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="{{asset('planification/fonts/icomoon/style.css')}}">
+        <link rel="stylesheet" href="{{asset('planification/fullcalendar/packages/core/main.css')}}">
+        <link href="{{asset('planification/fullcalendar/packages/daygrid/main.css')}}" rel='stylesheet' />
+        <link rel="stylesheet" href="{{asset('planification/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{asset('planification/css/style.css')}}">
+        <title>Calendar #9</title>
+    </head>
+    <body>
+
+
+    <div class="content">
+        <div id='calendar'></div>
+    </div>
+
+    <script src="{{asset('planification/js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{asset('planification/js/popper.min.js')}}"></script>
+    <script src="{{asset('planification/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('planification/fullcalendar/packages/core/main.js')}}"></script>
+    <script src="{{asset('planification/fullcalendar/packages/interaction/main.js')}}"></script>
+    <script src="{{asset('planification/fullcalendar/packages/daygrid/main.js')}}"></script>
+
+
+
+    <script src="{{asset('planification/js/main.js')}}"></script>
+    </body>
+    </html>
+
+{% for flash_message in app.flashes('warning') %}
+    <div class="alert alert-danger" style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); z-index: 9999;">
+        {{ flash_message }}
+    </div>
+{% endfor %}
+<style>
+    .navigation {
+        text-align: center;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+    }
+
+    .pagination-button {
+        background-color: #dbdfe4;
+        color: #fff;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 0 5px;
+        width: 100px;
+    }
+
+    .pagination-button.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .event-card {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .event-details {
+        margin-bottom: 10px;
+    }
+
+    .event-actions {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .btn-edit, .btn-delete, .btn-participer {
+        background-color: #FE5D37;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 12px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        margin-left: 10px;
+    }
+
+    .btn-edit:hover, .btn-delete:hover, .btn-participer:hover {
+        background-color: #FE5D37;
+    }
+
+    .event-image {
+        width: 150px;
+        height: auto;
+        border-radius: 8px;
+        align-self: center;
+        margin-bottom: 10px;
+    }
+</style>
+
+ 
+<div id="calendar"></div>
+
+
+   
+{#  <form action="{{ path('showevenemente') }}" method="get">#}
+{#    <label for="categorie">Category:</label>#}
+{#    <input type="text" id="categorie" name="categorie">#}
+{#    #}
+{#    <label for="localisation">Location:</label>#}
+{#    <input type="text" id="localisation" name="localisation">#}
+{#    <input type="submit" value="Filter">#}
+{#</form>#}
+
+<form action="{{ path('showevenemente') }}" method="get">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="mb-3">
+                <label for="categorie" class="form-label">Category:</label>
+
+                <input type="text" id="categorie" name="categorie" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="mb-3">
+                <label for="localisation" class="form-label">Location:</label>
+
+                <input type="text" id="localisation" class="form-control" name="localisation">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="mb-3 d-grid">
+                <label for="lou" class="invisible">Bouton</label>
+                <input type="submit" class="btn btn-participer " value="Filter" name="lou">
+            </div>
+        </div>
+    </div>
+</form>
+   
+{% for a in evenement %}
+<div class="event-card">
+    <img src="{{ asset('asset/User/img/th1.jpg') }}" alt="Image de l'événement" class="event-image">
+    <div class="event-details">
+        <p><strong>Event Name:</strong>{{ a.nom }}</p>
+        <p><strong>Description:</strong>{{ a.description }}</p>
+        <p><strong>Start Date:</strong> {{ a.dateDebut|date('Y-m-d') }}</p>
+        <p><strong>End Date:</strong>{{ a.dateFin|date('Y-m-d') }}</p>
+        <p><strong>Location:</strong>{{ a.localisation }}</p>
+        <p><strong>Category:</strong>{{ a.categorie }}</p>
+        <p><strong>Number of Participants:</strong> {{ a.nbParticipant }}</p>
+    </div>
+    <div class="event-actions">
+        <a class="btn-participer" href="{{ path('addparticipation',{'id': a.id} )}}">participate</a>
+    </div>
+</div>
+{% endfor %}
+
+<div class="navigation">
+    <ul class="pagination">
+        <li class="page-item">
+            {% if evenement.currentPageNumber > 1 %}
+                <a href="{{ path('showevenemente', {'page': evenement.currentPageNumber - 1}) }}"
+                   class="page-link pagination-button">Previous</a>
+            {% else %}
+                <span class="page-link pagination-button disabled">Previous</span>
+            {% endif %}
+        </li>
+        <li class="page-item">
+            {% if evenement.currentPageNumber < evenement.pageCount %}
+                <a href="{{ path('showevenemente', {'page': evenement.currentPageNumber + 1}) }}"
+                   class="page-link pagination-button">Next</a>
+            {% else %}
+                <span class="page-link pagination-button disabled">Next</span>
+            {% endif %}
+        </li>
+    </ul>
+</div>
+
+<script src="planification/fullcalendar/packages/core/main.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            plugins: [ 'dayGrid' ],
+            events: [
+                {% for b in evenement %}
+                    {
+                        title: '{{ b.nom|raw }}',
+                        start: '{{ b.dateDebut|date("Y-m-d") }}',
+                        end: '{{ b.dateFin|date("Y-m-d") }}'
+                        
+                    }{% if not loop.last %},{% endif %}
+                {% endfor %}
+            ]
+        });
+        calendar.render();
+    });
+</script>
+
+
+{% endblock %}

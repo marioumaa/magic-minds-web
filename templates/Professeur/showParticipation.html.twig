@@ -1,0 +1,118 @@
+{% extends 'base1.html.twig' %}
+{% block navimg %}
+{% endblock %}
+{% block body %}
+       <style>
+          .event-image {
+        width: 300px;
+        height: auto;
+        display: block;
+        margin: 0 auto 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+            /* Style pour la carte */
+            .card {
+                width: 40%;
+                margin: 20px auto; /* Centrer la carte horizontalement */
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée */
+                background-color: #f9f9f9; /* Couleur de fond légèrement différente */
+                font-family: Arial, sans-serif;
+                position: relative;
+                text-align: center;
+            }
+
+            .card-header {
+                padding: 12px;
+                text-align: left;
+                background-color: #f2f2f2;
+                border-top-left-radius: 8px; /* Bordures arrondies */
+                border-top-right-radius: 8px;
+            }
+
+            .card-body {
+                padding: 12px;
+            }
+
+            .btn-cancel {
+                background-color: #FE5D37;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                padding: 8px 12px;
+                text-decoration: none;
+                transition: background-color 0.3s ease;
+                margin-right: 10px;
+            }
+
+            .btn-cancel:hover {
+                background-color: #FE5D37;
+            }
+
+            .date-time {
+                font-size: 0.8em;
+                color: #333; /* Couleur de texte plus foncée */
+            }
+
+            .event-name, .user-name {
+                font-weight: bold; /* Mettre en gras */
+            }
+
+            .separator {
+                margin-bottom: 10px; /* Espacement entre chaque carte */
+            }
+        </style>
+
+        <div class="event-container">
+            <img src="{{ asset('asset/User/img/participation_orig.jpg') }}" alt="Image de l'événement" class="event-image">
+        </div>
+
+        {% for participation in Participation %}
+            <div class="card separator" id="participation-{{ participation.id }}">
+                <!-- Card header -->
+                <div class="card-header">
+                    <h2 class="date-time">Date: {{ participation.date|date('Y-m-d') }}</h2>
+                    <h3 class="date-time">Time: {{ participation.heure|date('H:i:s') }}</h3>
+                    <p class="event-name">Event: {{ participation.idEvenement.nom }}</p>
+                    <p class="user-name">Student: {{ participation.idUser.firstName }} {{ participation.idUser.lastName }}</p>
+                  </div>
+        <!-- Card body -->
+        <div class="card-body">
+            <button class="btn-cancel" data-id="{{ participation.id }}">Cancel</button>
+        </div>
+    </div>
+{% endfor %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const cancelButtons = document.querySelectorAll('.btn-cancel');
+
+        cancelButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const participationId = this.getAttribute('data-id');
+
+                if (confirm("Are you sure you want to cancel this participation?")) {
+                    fetch(`/deleteParticipationp/${participationId}`, {
+                        method: 'DELETE'
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // Supprime la carte sans recharger la page
+                            const card = document.getElementById('participation-' + participationId);
+                            card.remove();
+                        } else {
+                            console.error('Failed to cancel participation');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}

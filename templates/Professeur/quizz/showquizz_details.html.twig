@@ -1,0 +1,28 @@
+{% extends 'base1.html.twig' %}
+{% block navimg %}
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <h1 class="mb-4">Quiz Details</h1>
+        <div class="card p-4 mb-4" style="background-color: #f8f9fa; border: 2px solid #103741; border-radius: 15px;">
+            <div class="card-body">
+                <h5 class="card-title mb-3" style="color: #103741;">Title: {{ quiz.titre }}</h5>
+                <p class="card-text mb-2">Time: {{ quiz.temp }} minutes</p>
+                <p class="card-text mb-2">Number of Questions: {{ quiz.nbquestion }}</p>
+                <p class="card-text mb-2">Chapter: {{ quiz.Chapter }}</p>
+                <p class="card-text mb-2">Course: {{ quiz.Chapter.idCours }}</p>
+                <p class="card-text mb-2">Category: {{ quiz.Chapter.idCours.categorie }}</p>
+                {# Ajoutez d'autres détails du quiz ici si nécessaire #}
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a href="{{ path('showquizz') }}" class="btn btn-primary">Back to Quiz List</a>
+            <div>
+                <a href="{{ path('deletequizz', {'id': quiz.id}) }}" class="btn btn-danger mr-2">Delete Quiz</a>
+                <a href="{{ path('editquizz', {'id': quiz.id}) }}" class="btn btn-warning text-white mr-2">Edit Quiz</a>
+                <a href="{{ path('questions_for_quiz', {'quizId': quiz.id}) }}" class="btn btn-success">View Questions</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

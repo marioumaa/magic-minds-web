@@ -1,0 +1,58 @@
+{% extends 'Professeur/cours/courcemanage.html.twig' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="row"
+                style="border: 2px solid #103741; border-radius: 20px ; width: 100%; height:150px ; margin-top:20px">
+                <div class="col-lg-10">
+                    <h1 class="p-2">{{course.titre}}</h1>
+                    <p style="margin-left:10px;">{{course.description}}</p>
+                </div>
+                <div style="padding: 10px;" class="col-lg-1">
+                    <a style="margin:10px;" href="{{path('prof.cours.edit',{'id':course.id})}}"><i
+                            class="bi fa-2x bi-pen "></i></a>
+                </div>
+                <div style="padding: 10px;" class="col-lg-1">
+                    <a style="margin: 10px;" href="{{path('prof.cours.delete',{'id':course.id})}}"><i
+                            class="bi fa-2x bi-trash"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row mt-3">
+        <div class="col-lg-6">
+            <h5 class="mb-1">{{course.titre}} chapters</h5>
+        </div>
+        <div class="col-lg-6 d-flex justify-content-end">
+            <a style="margin-right:10px;" class="btn btn-primary" href="{{path('app_ressource.add')}}">Add a
+                chapter</a>
+        </div>
+
+        <div style="padding-right:2%" class="row pt-3">
+            {% for r in ress %}
+            <div style="margin-bottom:20px" class="col-lg-4">
+                <div style="border: 2px solid #103741; border-radius: 20px ; width:100%; height:100px ;">
+                    <table width="100%">
+                        <tr>
+                            <td align="center">
+                                <h4 class=" text-success">{{r.titre}}</h4>
+                            </td>
+                            <td align="center">
+                                <a href="{{ path('app_ressourced', {'id': r.id}) }}">
+                                    <div><img width="100px" height="100px"
+                                            src="{{ asset('./asset/User/img/file.png') }}">
+                                    </div>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

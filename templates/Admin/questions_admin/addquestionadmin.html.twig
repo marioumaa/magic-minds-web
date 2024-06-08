@@ -1,0 +1,50 @@
+{% extends 'Admin/base.html.twig' %}
+
+{% block title %}Add Question{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3 class="card-title">Add Question</h3>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+                <div class="form-group">
+                    {{ form_label(form.question, 'Question') }}
+                    {{ form_widget(form.question, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.question) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.choix1, 'Choice 1') }}
+                    {{ form_widget(form.choix1, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.choix1) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.choix2, 'Choice 2') }}
+                    {{ form_widget(form.choix2, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.choix2) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.choix3, 'Choice 3') }}
+                    {{ form_widget(form.choix3, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.choix3) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.reponse, 'Answer') }}
+                    {{ form_widget(form.reponse, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.reponse) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.quiz, 'Quiz') }}
+                    {{ form_widget(form.quiz, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.quiz) }}
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                {{ form_end(form) }}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

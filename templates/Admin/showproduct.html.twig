@@ -1,0 +1,69 @@
+{% extends 'Admin/base.html.twig' %}
+{% block content %}
+    <div class="row">
+        <div class="col-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Order Status</h4>
+                    <a href="{{ path('app_addproduct') }}">
+                    <button type="button" class="btn btn-danger btn-fw">add</button></a>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>
+                                    <div class="form-check form-check-muted m-0">
+                                        <label class="form-check-label">
+                                            <input
+                                                    type="checkbox"
+                                                    class="form-check-input"
+                                            />
+                                        </label>
+                                    </div>
+                                </th>
+                                <th>product name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>remove</th>
+                                <th>edit</th>
+                                <th>show</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for i in produit %}
+                                <tr>
+                                    <td>
+                                        <div class="form-check form-check-muted m-0">
+                                            <label class="form-check-label">
+                                                <input
+                                                        type="checkbox"
+                                                        class="form-check-input"
+                                                />
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img
+                                                src="{{ i.img1 }}"
+                                                alt="image" width="80px"
+                                                height="80px"
+                                        />
+                                        <span class="pl-2">{{ i.nom }}</span>
+                                    </td>
+                                    <td>{{ i.quantite }}</td>
+                                    <td>{{ i.prix }}</td>
+                                    <td><a href="{{ path('app_removeproduct',{'id':i.id}) }}"><button type="button" class="btn btn-danger btn-fw">del</button></a> </td>
+                                    <td><a href="{{ path('app_updateproduct',{'id':i.id}) }}"><button type="button" class="btn btn-primary btn-fw">edit</button></a></td>
+                                    <td><a href="{{ path('app_detailsproduct',{'id':i.id}) }}"><button type="button" class="btn btn-success btn-fw">show</button></a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

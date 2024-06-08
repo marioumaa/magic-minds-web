@@ -1,0 +1,45 @@
+{% extends 'Admin/base.html.twig' %}
+
+{% block title %}Quiz List{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3 class="card-title">Quiz List</h3>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Time</th>
+                            <th>Number of Questions</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for q in quiz %}
+                        <tr>
+                            <td>{{ q.id }}</td>
+                            <td>{{ q.titre }}</td>
+                            <td>{{ q.temp }}</td>
+                            <td>{{ q.nbquestion }}</td>
+                            <td>
+                                <a href="{{ path('editquizzadmin', {'id': q.id}) }}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="{{ path('deletequizzadmin', {'id': q.id}) }}" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <a href="{{ path('addquizzadmin') }}" class="btn btn-success">Add Quiz</a>
+    <a href="{{ path('showquestionadmin') }}" class="btn btn-success">Show questions</a>
+</div>
+{% endblock %}

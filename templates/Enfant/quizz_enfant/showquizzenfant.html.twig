@@ -1,0 +1,68 @@
+{% extends 'base1.html.twig' %}
+{% block body %}
+<div class="container my-5">
+<h1 class="mb-5 mt-3 text-center display-3">- {{ quiz.titre }} -</h1>
+<div class="row justify-content-center">
+{% for i, question in quiz.idQuestion %}
+<div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+<div class="card bg-light">
+<div class="card-body">
+<h2 class="my-3 mx-2">{{question.question}}</h2>
+
+<div class="d-flex gap-2 px-3">
+    <input type="checkbox" name="answer" value="{{ question.choix1 }}" id="choix1">
+    <label type="checkbox" name="" id="choix1">{{ question.choix1 }}</label>
+</div>
+<div class="d-flex gap-2 px-3">
+    <input type="checkbox" name="answer" value="{{ question.choix2 }}" id="choix2">
+    <label type="checkbox" name="" id="choix2">{{ question.choix2 }}</label>
+</div>
+<div class="d-flex gap-2 px-3">
+    <input type="checkbox" name="answer" value="{{ question.choix3 }}" id="choix3">
+    <label type="checkbox" name="" id="choix3">{{ question.choix3 }}</label>
+</div>
+
+<h6 hidden>{{ question.reponse }}</h2>
+</div>
+</div>
+</div>
+    {% endfor %}
+
+
+<form action="{{ path('app_quiz_result',{'id':quiz.id}) }}">
+    
+    
+    <input hidden name="result" type="text" id="result">
+    <button type="submit" class="next-btn my-5" onclick="submitQuiz()">Submit</button>
+</form>
+</div>
+</div>
+    <script>
+        const submitQuiz = () => {
+            const headerResult = document.querySelector("#result");
+            const checkboxes = document.querySelectorAll("input[name='answer']");
+            const answers = document.querySelectorAll("h6");
+    
+            var i = 0;
+            var arrChoix = [];
+            checkboxes.forEach((checkbox, i) => {
+                if (checkbox.checked)
+                    arrChoix.push(i);
+            })
+            var result = 0;
+            answers.forEach((answer, i) => {
+                for (let index = i * 3; index < i*3 + 3; index++) {
+                    if (answer.textContent === checkboxes[arrChoix[i]].value) {
+                        result++;
+                        break;
+                    }
+                }
+            });
+            headerResult.value = result;
+
+        }
+    </script>
+    
+
+
+    {% endblock %}

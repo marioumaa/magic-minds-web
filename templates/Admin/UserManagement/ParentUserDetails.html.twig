@@ -1,0 +1,77 @@
+{% extends 'Admin/base.html.twig' %}
+
+
+  {% block content %}
+      <div class="col-sm-2">
+      <a class="btn bgOrange blColor w-100 py-3 mb-2" href="{{ path('user.add') }}">Add User</a>
+      </div>
+      <section class="container" style="background-color: #eee;">
+          {% if users is defined %}
+              <table class="table">
+                  <thead>
+                  <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">FirstName</th>
+                      <th scope="col">LastName</th>
+                      <th scope="col">Gender</th>
+                      <th scope="col">Age</th>
+                      <th scope="col">email</th>
+                      <th scope="col">Delete</th>
+                      <th scope="col">Update</th>
+                      <th scope="col">details</th>
+                  </tr>
+                  </thead>
+                  {% for i in users %}
+                  <tbody>
+                  <tr>
+                       <td></td>
+                          <td>{{ i.firstName }}</td>
+                      <td>{{ i.lastName }}</td>
+                      <td>{{ i.gender }}</td>
+                      <td>{{ i.age }}</td>
+                          <td>{{ i.email }}</td>
+
+                      <td><a href="{{ path('user.delete',{'id': i.id}) }}"><i class="fa-solid fa-trash"></i></a></td>
+                      <td><a href="{{ path('user.add',{'id': i.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                      <td><a href="{{ path('user.show',{'id': i.id}) }}"> <i class="fa-solid fa-compact-disc"></i></a></td>
+                  </tr>
+                  </tbody>
+                  {% endfor %}
+
+              </table>
+          {% else %}
+              <h1 style="color:red;">no user now </h1>
+
+          {% endif %}
+
+
+{#          {% if users is defined %}#}
+{#          {% for i in users %}#}
+{#              <div class="row">#}
+{#                  <div class="col-lg-4">#}
+{#                      <div class="card mb-4">#}
+{#                          <div class="card-body text-center">#}
+{#                              <img src="{{ asset('uploads/user/')~i.picture }}" alt="avatar"#}
+{#                                   class="rounded-circle img-fluid" style="width: 150px;">#}
+{#                              <img class="rounded-circle" width="50" height="50" src="{{ asset('uploads/user/')~i.picture }}">#}
+{#                              <h5 class="my-3">{{ i.firstName }}  {{ i.lastName }}</h5>#}
+{#                              <p class="text-muted mb-1">{{ i.gender }}</p>#}
+{#                              <p class="text-muted mb-4">{{ i.email }}</p>#}
+{#                              <div class="d-flex justify-content-center mb-2">#}
+{#                                 <a class="btn btn-primary" href="{{ path('user.delete',{'id': i.id}) }}">Delete</a>#}
+{#                                 <a class="btn btn-outline-primary ms-1" href="{{ path('user.add',{'id': i.id}) }}">Update</a>#}
+{#                              </div>#}
+{#                          </div>#}
+{#                      </div>#}
+
+{#                  </div>#}
+
+{#              </div>#}
+
+{#          {% endfor %}#}
+{#          {% else %}#}
+{#              <h1 style="color:red;">no user now </h1>#}
+
+{#          {% endif %}#}
+      </section>
+  {% endblock %}

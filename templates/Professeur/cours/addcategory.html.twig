@@ -1,0 +1,59 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}Classes{% endblock %}
+{% block navimg %}
+{% endblock %}
+{% block body %}
+<hr style="color: #103741; margin:0%">
+<div class="container p-5">
+    <div class="bg-light rounded">
+        <div class="row g-0">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s"
+                style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+                <div class="h-100 d-flex flex-column justify-content-center p-5">
+                    
+                    <h1 style="margin-left:75px;" class="mb-3">Add a category</h1>
+                    {{ form_start( f_categorie,{'attr': {'novalidate': 'novalidate'}} ) }}
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <div class="form-floating">
+                                {{ form_row(f_categorie.titre, {'attr': {'class': 'form-control border-0',
+                                'placeholder':
+                                'Title'}})
+                                }}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                {{ form_row(f_categorie.description, {'attr': {'class': 'form-control border-0',
+                                'placeholder':
+                                'Description','style': 'height: 150px'}}) }}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div >
+                                {{ form_row(f_categorie.image, {'attr': {'class': 'form-control border-0 bg-white'}}) }}
+                                {% if imgmessage=="1" %}
+                                   <small style="font-size: smaller; color:#dc3545; margin-left: 80px;" >Category must have an image</small> 
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div style="margin-left: 40px;" class="col-sm-6">
+                            {{ form_row(f_categorie.save, {'attr': {'class': 'btn btn-primary w-100 py-3'}}) }}
+                        </div>
+                    </div>
+                    {{ form_end(f_categorie) }}
+                    
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s"
+                style="min-height: 400px; visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
+                <div class="position-relative h-100">
+                    <img class="position-absolute w-100 h-100 rounded" src="asset\User\img\appointment.jpg"
+                        style="object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

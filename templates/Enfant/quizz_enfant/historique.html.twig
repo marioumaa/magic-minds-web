@@ -1,0 +1,28 @@
+{% extends 'base1.html.twig' %}
+{% block navimg %}
+{% endblock %}
+{% block body %}
+
+<div class="container my-5">
+    
+    <h1 class="display-3 text-center my-5">History</h1>
+    
+    <div class="row justify-content-center">
+        {% for i in eval %}
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h5 class="card-title"><span class="text-primary">Quiz</span> {{ i.idQuiz }}</h5>
+                    <p class="card-text"><span class="text-success">Result:</span> {{ i.resultat }}/{{ i.idQuiz.nbquestion}}</p>
+                    <p class="card-text"><span class="text-danger">Date:</span> {{ i.date|date('F j, Y') }}</p>
+                    <p class="card-text"><span class="text-danger">Chapter:</span> {{ i.idQuiz.Chapter  }}/{{ i.idQuiz.Chapter.idCours }}/{{ i.idQuiz.Chapter.idCours.categorie }}</p>
+                    
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <a href="{{ path('showallquizz') }}" class="btn btn-primary mb-3">Go back</a> 
+</div>
+
+{% endblock %}

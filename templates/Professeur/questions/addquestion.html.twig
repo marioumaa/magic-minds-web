@@ -1,0 +1,48 @@
+{% extends 'base1.html.twig' %}
+{% block navimg %}
+{% endblock %}
+{% block body %}
+<div class="container">
+    <h1>Add Question</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            {{ form_start(form,{'attr': {'novalidate': 'novalidate'}})}}
+           {{form_errors(form)}}
+            <div class="form-group">
+                {{ form_label(form.question, 'Question') }}
+                {{ form_widget(form.question, {'attr': {'class': 'form-control'}}) }}
+                 {{form_errors(form.question)}}
+                
+            </div>
+            <div class="form-group">
+                {{ form_label(form.choix1, 'Choice 1') }}
+                {{ form_widget(form.choix1, {'attr': {'class': 'form-control'}}) }}
+                 {{form_errors(form.choix1)}}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.choix2, 'Choice 2') }}
+                {{ form_widget(form.choix2, {'attr': {'class': 'form-control'}}) }}
+                {{form_errors(form.choix2)}}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.choix3, 'Choice 3') }}
+                {{ form_widget(form.choix3, {'attr': {'class': 'form-control'}}) }}
+                {{form_errors(form.choix3)}}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.reponse, 'Correct Answer') }}
+                {{ form_widget(form.reponse, {'attr': {'class': 'form-control'}}) }}
+                {{form_errors(form.reponse)}}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.quiz, 'Quiz') }}
+                {{ form_widget(form.quiz, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        
+        
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

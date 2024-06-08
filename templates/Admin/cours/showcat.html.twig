@@ -1,0 +1,208 @@
+{% extends "Admin/base.html.twig" %}
+{% block title %}
+Categories
+{% endblock %}
+{% block content %}
+<style>
+    .content {
+        display: none;
+    }
+
+    .contentd {
+        display: none;
+    }
+</style>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="row">
+            <table>
+                <tr>
+                    <td><a href="#" onclick="contentDisplay(1)">
+                            <h6 style="color:#103741 ;margin-right:10px" class="font-weight-bold">Categories</h6>
+                        </a>
+                    </td>
+                    <td><a href="#" onclick="contentDisplay(2)">
+                            <h6 style="color:#103741 ;margin-right:10px" class="font-weight-bold">Courses</h6>
+                        </a>
+                    </td>
+                    <td><a href="#" onclick="contentDisplay(3)">
+                            <h6 style="color:#103741 ;margin-right:10px" class="font-weight-bold">Chapters</h6>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="block1" class="content">
+        <div class="card-body">
+            <div>
+                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="d-flex flex-row-reverse">
+                        <div class="p-2">
+                            <a style="background-color:#103741;color:white" href="{{path('admin.category.add')}}"
+                                class="btn">
+                                <span class="text">Add new category</span>
+                            </a>
+                        </div>
+                        <div class="p-2">
+                            <a style="background-color:#369669;color:white" href="{{path('app_generatePDF')}}"
+                                class="btn">
+                                <span class="text">Download <i class="bi bi-filetype-pdf"></i></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0"
+                                role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                            colspan="1" aria-label="Office: activate to sort column ascending"
+                                            style="width:8%;">
+                                            Image</th>
+                                        <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+                                            rowspan="1" colspan="1" aria-sort="ascending"
+                                            aria-label="Name: activate to sort column descending" style="width:25%;">
+                                            Title</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                            colspan="1" aria-label="Position: activate to sort column ascending"
+                                            style="width:25%;">
+                                            Number of courses</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                            colspan="1" aria-label="Position: activate to sort column ascending"
+                                            style="width:25%;">
+                                            Number of chapitre
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                            colspan="1" aria-label="Office: activate to sort column ascending"
+                                            style="width:17%;">
+                                            Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for c in categorie %}
+                                    <tr class="odd">
+                                        <td><img style="width: 50px;height: 50px;;"
+                                                src="{{asset('uploads/images/' ~ c.image)}}" alt=""></td>
+                                        <td class="sorting_1"><a href="{{path('app_showDetails',{'id':c.id})}}">{{c.titre}}</a></td>
+                                        <td>{{c.nbrCours}}</td>
+                                        <td>{{c.nbrChapitre}}</td>
+                                        <td style="border-left:none ;border-top:none;border-right:none" class="row">
+                                            <div class="col-lg-6"><a href="{{path('admineditcategorie',{'id':c.id})}}">
+                                                    <i style="color:#FE5D37;" class="fa-solid fa-pen-to-square"></i></a>
+                                            </div>
+                                            <div class="col-lg-6"><a
+                                                    href="{{path('admindeletecategorie',{'id':c.id})}}">
+                                                    <i style="color:#FE5D37;" class="fa-solid fa-trash"></i>
+                                                    </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="block2" class="content">
+        <div class="card-body">
+            <div>
+                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row mb-2 ">
+                        <div class="col-lg-10">
+                            <form id="filtercat">
+                                <table class="m-2 ">
+                                    <tr class="justify-content-end">
+
+                                        {% for cat in cat.getcategories %}
+                                        <td>
+                                            <p><input type="checkbox" name="categories[]" id="{{cat.id}}"
+                                                    value="{{cat.id}}">
+                                                <label for="{{cat.id}}">{{cat.titre}}</label>
+                                            </p>
+                                        </td>
+                                        {% endfor %}
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                        <div class="col-lg-2">
+                            <a style="background-color:#103741;color:white" href="{{path('admin.cours.add')}}"
+                                class="btn">
+                                <span class="text">Add new course</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row" id="filtercontent">
+                        {% include "Admin/cours/_contentcour.html.twig" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="block3" class="content">
+        <div class="card-body">
+            <div>
+                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0"
+                                role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                            colspan="1" aria-label="Office: activate to sort column ascending"
+                                            style="width:8%;">
+                                            Title</th>
+                                        <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+                                            rowspan="1" colspan="1" aria-sort="ascending"
+                                            aria-label="Name: activate to sort column descending" style="width:42%;">
+                                            Type</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                            colspan="1" aria-label="Position: activate to sort column ascending"
+                                            style="width:20%;">
+                                            Course</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                            colspan="1" aria-label="Office: activate to sort column ascending"
+                                            style="width:30%;">
+                                            Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for ch in chapters %}
+                                    <tr class="odd">
+                                        <td>{{ch.titre}}</td>
+                                        <td class="sorting_1">{{ch.type}}</td>
+                                        <td>{{ch.idCours}}</td>
+                                        <td style="border-left:none ;border-top:none;border-right:none" class="row">
+                                            <div class="col-lg-6"><a href="#">
+                                                    <i style="color:#FE5D37;" class="fa-solid fa-pen-to-square"></i></a>
+                                            </div>
+                                            <div class="col-lg-6"><a
+                                                    href="{{path('admindeleteressource',{'id':ch.id})}}">
+                                                    <i style="color:#FE5D37;" class="fa-solid fa-trash"></i>
+                                                    </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block categorie %}
+    {%endblock %}
+
+</div>
+<script src="{{ asset('./asset/Admin/js/filter.js')}}"></script>
+<script src="{{ asset('./asset/Admin/js/content.js')}}"></script>
+
+{% endblock %}

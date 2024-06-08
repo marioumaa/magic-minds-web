@@ -1,0 +1,58 @@
+{% extends 'Admin/base.html.twig' %}
+{% block content %}
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Add product to store</h4>
+                <p class="card-description">Add product to store</p>
+                <form method="post">
+                    {{ form_start(f) }}
+                    <div class="form-group">
+                        {{ form_label(f.nom) }}
+                        {{ form_widget(f.nom, {'attr': {'class': 'form-control', 'placeholder': 'Name'}}) }}
+                        {{ form_errors(f.nom) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.prix) }}
+                        {{ form_widget(f.prix, {'attr': {'class': 'form-control', 'placeholder': 'Price'}}) }}
+                        {{ form_errors(f.prix) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.categorie) }}
+                        {{ form_widget(f.categorie, {'attr': {'class': 'form-control', 'placeholder': 'Category'}}) }}
+                        {{ form_errors(f.categorie) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.quantite) }}
+                        {{ form_widget(f.quantite, {'attr': {'class': 'form-control', 'placeholder': 'Quantity'}}) }}
+                        {{ form_errors(f.quantite) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.img1) }}
+                        {{ form_widget(f.img1, {'attr': {'class': 'form-control', 'placeholder': 'URL'}}) }}
+                        {{ form_errors(f.img1) }}
+
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.img2) }}
+                        {{ form_widget(f.img2, {'attr': {'class': 'form-control', 'placeholder': 'URL'}}) }}
+                        {{ form_errors(f.img2) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.img3) }}
+                        {{ form_widget(f.img3, {'attr': {'class': 'form-control', 'placeholder': 'URL'}}) }}
+                        {{ form_errors(f.img3) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.description) }}
+                        {{ form_widget(f.description, {'attr': {'class': 'form-control', 'rows': '4'}}) }}
+                        {{ form_errors(f.description) }}
+                    </div>
+                    {{ form_widget(f.submit) }}
+                    {{ form_end(f) }}
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

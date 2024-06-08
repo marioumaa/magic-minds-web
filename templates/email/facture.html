@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<header>
+    <style>
+        body {
+
+            padding: 30px;
+        }
+
+        .container {
+            width: 21cm;
+            min-height: 29.7cm;
+        }
+
+        .invoice {
+
+            width: 100%;
+            padding: 50px;
+        }
+
+        .logo {
+            width: 5cm;
+        }
+
+        .document-type {
+            text-align: right;
+            color: #444;
+        }
+
+        .conditions {
+            font-size: 0.7em;
+            color: #666;
+        }
+
+        .bottom-page {
+            font-size: 0.7em;
+        }
+    </style>
+</header>
+<bod>
+<div class="container">
+    <div class="invoice">
+        <div class="row">
+            <div class="col-7">
+                <img src="C:\Users\achra\Desktop\pide\Magic-Minds\public\asset\Admin\img\logo.png" class="logo">
+            </div>
+            <div class="col-5">
+                <h1 class="document-type display-4">FACTURE</h1>
+                <p class="text-right"><strong>N°90T-17-01-0123</strong></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-7">
+                <p>
+                    <strong>Client</strong><br>
+                    {user_name} {user_last}<br>
+                </p>
+            </div>
+            <div class="col-5">
+                <br><br><br>
+                <p>
+                    <strong>MagicMinds</strong><br>
+                    Réf. Client <em>C00022</em><br>
+                    esprit<br>
+                    54250 JARNY
+                </p>
+            </div>
+        </div>
+        <br>
+        <br>
+        <h6>Audits et rapports mensuels (4er Mars 2024 )</h6>
+        <br>
+
+        <table border='1' class="table table-striped">
+            <thead>
+            <tr>
+                <th>id_product</th>
+                <th>name</th>
+                <th>description</th>
+                <th>price</th>
+                <th>Quantity</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                {products}
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-8">
+            </div>
+            <div class="col-4">
+                <br>
+                <br>
+                <table class="table table-sm text-right">
+
+                    <tr>
+                        <td><strong>Total TTC: </strong></td>
+                        <td class="text-right">$ {total}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</bod>
+</html>

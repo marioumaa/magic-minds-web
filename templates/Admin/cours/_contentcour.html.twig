@@ -1,0 +1,56 @@
+<div class="col-sm-12">
+    <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid"
+        aria-describedby="dataTable_info" style="width: 100%;">
+        <thead>
+            <tr role="row">
+                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                    aria-label="Office: activate to sort column ascending" style="width:20%;">
+                    Title
+                </th>
+                <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                    aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width:16%;">
+                    Number of chapters
+                </th>
+                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                    aria-label="Position: activate to sort column ascending" style="width:16%;">
+                    Esteamed periode
+                </th>
+                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                    aria-label="Position: activate to sort column ascending" style="width:16%;">
+                    Category
+                </th>
+                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                    aria-label="Position: activate to sort column ascending" style="width:16%;">
+                    Status
+                </th>
+                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                    aria-label="Office: activate to sort column ascending" style="width:16%;;">
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for co in courses %}
+            <tr class="odd">
+                <td>{{co.titre}}</td>
+                <td class="sorting_1">{{co.nbChapitre}}</td>
+                <td>{{co.duree}}</td>
+                <td>{{co.categorie}}</td>
+                <td>{{co.status}}</td>
+                <td style="border-left:none ;border-top:none;border-right:none" class="row">
+                    <div class="col-lg-4"><a href="{{path('app_admin.cours.valid',{'id':co.id})}}">
+                            <i style="color:#FE5D37;" class="fa-solid fa-check"></i></a>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="{{path('app_admin.cours.edit',{'id':co.id})}}"><i style="color:#FE5D37;" class="fa-solid fa-pen-to-square"></i></a>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="{{path('app_admin.cours.delete',{'id':co.id})}}"><i style="color:#FE5D37;" class="fa-solid fa-trash"></i></a>
+                    </div>
+
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

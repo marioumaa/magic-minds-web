@@ -1,0 +1,57 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %} Edit category {% endblock %}
+{% block navimg %}
+{% endblock %}
+{% block body %}
+<hr style="color: #103741; margin:0%">
+<div style="margin: 50px ;" class="container">
+    <div class="bg-light rounded">
+        <div class="row g-0">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s"
+                style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+                <div class="h-100 d-flex flex-column justify-content-center p-5">
+                    <h1 class="mb-3">Edit a category</h1>
+                    {{ form_start( editf) }}
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <div class="form-floating">
+                                {{ form_widget(editf.titre, {'attr': {'class': 'form-control border-0',
+                                'placeholder':
+                                'Title'}})
+                                }}
+                                {{ form_label(editf.titre, 'Title') }}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                {{ form_widget(editf.description, {'attr': {'class': 'form-control border-0',
+                                'placeholder':
+                                'Description','style': 'height: 150px'}}) }}
+                                {{ form_label(editf.description, 'Description') }}
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div>
+                                {{ form_widget(editf.image, {'attr': {'class': 'form-control border-0 bg-white'}}) }}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_widget(editf.save, {'attr': {'class': 'btn btn-primary w-100 py-3'}}) }}
+                        </div>
+                    </div>
+                    {{ form_end(editf) }}
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s"
+                style="min-height: 400px; visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
+                <div class="position-relative h-100">
+                    <img class="position-absolute w-100 h-100 rounded"
+                        src="{{ asset('asset/User/img/classes-1.jpg') }}"
+                        style="object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

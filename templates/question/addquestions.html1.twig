@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="card-body">
+        <!-- Loop through each question -->
+        {% for question in questions %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ question.name }}</h5>
+                    <p class="card-text">Date: {{ question.date|date('d-m-Y') }}</p>
+                    <p class="card-text">Type: {{ question.Type }}</p>
+                    <p class="card-text">Commentaire: {{ question.commentaire }}</p>
+                    <img src="{{ asset('uploads/images/' ~ question.image) }}" style="width: 80px; height: 80px;" class="card-img-top" alt="Image">
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group" role="group" aria-label="Actions">
+                        <a class="btn cur-p btn-danger" href="{{ path('delete_ab', {'id': question.id}) }}">Delete</a>
+                        <a class="btn cur-p btn-success" href="{{ path('update_ab', {'name': question.name}) }}">Update</a>
+                        <a class="btn cur-p btn-primary" href="{{ path('add_Reponse') }}">Envoyer un message</a>
+                        <a href="{{ path('like_question', {'id': question.id}) }}"><img src="{{ asset('images/like.jpg') }}" alt="Like" class="like-button" width="80" height="50"></a>
+                        <a href="{{ path('dislike_question', {'id': question.id}) }}"><img src="{{ asset('images/dislike.png') }}" alt="DisLike" class="dislike-button" width="80" height="50"></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="pagination">
+            {{ knp_pagination_render(questions) }}
+        </div>
+    </div>
+
+    <script>
+        // Fonction pour envoyer une requête HTTP lorsqu'un bouton Dislike est cliqué
+        document.querySelectorAll('.dislike-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const url = button.dataset.action;
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        // Rafraîchir la page après l'action réussie
+                        location.reload();
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        });
+    </script>
+{% endblock %}

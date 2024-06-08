@@ -1,1 +1,2 @@
-"# magic-minds-web" 
+# Magic-Minds
+

@@ -1,0 +1,32 @@
+{% extends 'base1.html.twig'  %}
+{% block navimg %}
+{% endblock %}
+{% block body %}
+<table border="3">
+    <tr>
+        <td>id</td>
+        <td>id_quizz</td>
+        <td>question</td>
+         <td>choice1</td>
+          <td>choice2</td>
+           <td>choice3</td>
+            <td>correctanswer</td>
+        <td>action</td>
+        <td>action</td>
+    </tr>
+    {% for a in question %}
+    <tr>
+        <td>{{a.id}}</td>
+        <td>{{a.quiz.id}}</td>
+        <td>{{a.question}}</td>
+        <td>{{a.choix1}}</td>
+        <td>{{a.choix2}}</td>
+        <td>{{a.choix3}}</td>
+        <td>{{a.reponse}}</td>
+        <td><a href="{{path('editquestion',{'id':a.id})}}">edit</a></td>
+        <td><a href="{{path('deletequestion',{'id':a.id})}}">delete</a></td>
+       
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

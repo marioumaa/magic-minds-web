@@ -1,0 +1,52 @@
+{% extends 'Professeur/cours/courcemanage.html.twig' %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="row"
+        style="border: 2px solid #103741; border-radius: 20px ; width: 100%; height:150px ; margin-top:20px">
+        <div style="text-align:center;" class="col-lg-2 justify-content-center pt-1 ">
+          <img width="130px" height="130px" src="{{asset('uploads/images/' ~ categorie.image)}}" alt="">
+        </div>
+        <div class="col-lg-8">
+          <h1 class="p-2">{{categorie.titre}}</h1>
+          <p style="margin-left:10px;">{{categorie.description}}</p>
+        </div>
+        <div style="padding: 10px;" class="col-lg-1">
+          <a style="margin:10px;" href="{{path('app_editcategorie',{'id':categorie.id})}}"><i
+              class="bi fa-2x bi-pen "></i></a>
+        </div>
+        <div style="padding: 10px;" class="col-lg-1">
+          <a style="margin: 10px;" href="{{path('app_deletecategorie',{'id':categorie.id})}}"><i
+              class="bi fa-2x bi-trash"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row mt-3">
+    <div class="col-lg-6">
+      <h5 class="mb-1">{{categorie.titre}} courses list</h5>
+    </div>
+    <div class="col-lg-6 d-flex justify-content-end">
+      <a style="margin-right: 10px;" class="btn btn-primary" href="{{path('prof.cours.add')}}">Add a course</a>
+    </div>
+    <hr style="margin-top:5px;">
+    <div class="row">
+      {% for cl in course.getcourses(categorie.id) %}
+      <div style="margin-bottom:20px" class="col-lg-3 d-flex justify-content-center">
+        <a href="{{path('app_prof.course.chapters',{'id':cl.id})}}">
+          <div style="border: 2px solid #103741 ; border-radius: 20px ; width:  200px; height:100px ;">
+            <div class="row">
+              <h4 style="margin-left:20px; color:#369669 ;" class="mb-1 mt-1">{{cl.titre}}</h4>
+              <h6 style="margin-left:20px;" class="mb-1 mt-1">{{cl.duree}} semaines</h6>
+              <h6 style="margin-left:20px;" class="mb-1 mt-1">{{cl.nbChapitre}} chapitre</h6>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

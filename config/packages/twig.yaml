@@ -1,0 +1,13 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    globals:
+        form_themes: ['bootstrap_4_layout.html.twig']
+
+        cat: '@App\Twig\Extension\CategoryExtension'
+
+        course: '@App\Twig\Extension\CoursExtension'
+
+        
+when@test:
+    twig:
+        strict_variables: true

@@ -1,0 +1,23 @@
+{% extends 'base1.html.twig' %}
+{% block navimg %}
+{% endblock %}
+{% block body %}
+<div class="my-5 d-flex flex-column gap-2">
+
+    <h1 class="text-center display-1 my-5"> Your Result <br> {{ result }}/{{ quiz.nbquestion}}</h1>
+    {% if result <= quiz.nbquestion and result > quiz.nbquestion-3 %}
+        <p class="text-center fs-3" style="color: #4CAF50;">Congratulation ! You Have an Excellent Score 👌</p>
+    {% elseif result <= quiz.nbquestion-3 and result >= quiz.nbquestion/2 %}
+        <p class="text-center fs-3" style="color: #FFC107;">Your Score is Average. You can do better !</p>
+    {% else %}
+        <p class="text-center fs-3" style="color: #FF5722;">You Can Do better !</p>
+    {% endif %}
+
+    <!-- Bouton de redirection -->
+    <div class="text-center">
+        <a style="width: 150px;" href="{{ path('app_historique', {'id': app.user.id}) }}" class="btn btn-primary">Go to History</a>
+        <a style="width: 150px;" href="{{ path('showallquizz') }}" class="btn btn-primary">Go back</a>
+    </div>
+
+</div>
+{% endblock %}

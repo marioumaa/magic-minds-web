@@ -1,0 +1,96 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}Classes{% endblock %}
+{% block navimg %}
+{% endblock %}
+{% block body %}
+
+<hr style="color: #103741; margin:0%">
+{# sidnav bar start #}
+<div style="width: 280px; " class="d-flex flex-column flex-shrink-0 bg-light p-3 mb-0" >
+    <table>
+        <tr>
+            <td align="center">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                    <span  class="fs-4">Categories</span>
+                </a>
+            </td>
+            <td>
+                {# bouton add-category #}
+                <button type="button" class="btn btn-primary" style="border-radius: 50%;" data-bs-toggle="modal"
+                    data-bs-target="#addcategory">
+                    +
+                </button>
+                {# category pop up #}
+            </td>
+        </tr>
+    </table>
+    <hr style="color: #ffffff">
+    <ul class="nav nav-pills flex-column mb-auto">
+        {% for c in cat %}
+        <li class="nav-item">
+            <a href="#"  class="nav-link " aria-current="page">
+                {{c.titre}}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {# addcategory popup #}
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal fade" id="addcategory" tabindex="-1" aria-labelledby="addcategoryLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" style="background-color: #fff5f3">
+                    <div class="modal-header">
+                        <h1 class="mb-2" style="text-align: center" id="addcategoryLabel">Add a category</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {{ form_start( f_categorie) }}
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    {{ form_widget(f_categorie.titre, {'attr': {'class': 'form-control border-0',
+                                    'placeholder':
+                                    'Title'}})
+                                    }}
+                                    {{ form_label(f_categorie.titre, 'Title') }}
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    {{ form_widget(f_categorie.description, {'attr': {'class': 'form-control border-0',
+                                    'placeholder':
+                                    'Description','style': 'height: 150px'}}) }}
+                                    {{ form_label(f_categorie.description, 'Description') }}
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    {{ form_widget(f_categorie.image, {'attr': {'class': 'form-control border-0',
+                                    'placeholder':
+                                    'Category
+                                    image'}}) }}
+                                    {{ form_label(f_categorie.image, 'Category image') }}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                {{ form_widget(f_categorie.save, {'attr': {'class': 'btn btn-primary w-100 py-3'}}) }}
+                            </div>
+                            <div class="col-sm-6">
+                                <button type="button" class="btn btn-primary w-100 py-3"
+                                    data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                        {{ form_end(f_categorie) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {# end add_category pop up #}
+</div>
+{# sidbar end #}
+
+
+{% endblock %}

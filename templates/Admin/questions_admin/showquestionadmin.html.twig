@@ -1,0 +1,46 @@
+{% extends 'Admin/base.html.twig' %}
+
+{% block title %}Questions{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h3 class="card-title">Questions</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>id_quizz</th>
+                        <th>Question</th>
+                        <th>Choice 1</th>
+                        <th>Choice 2</th>
+                        <th>Choice 3</th>
+                        <th>Correct Answer</th>
+                        <th>Action</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for a in question %}
+                    <tr>
+                        <td>{{ a.id }}</td>
+                        <td>{{ a.quiz.id }}</td>
+                        <td>{{ a.question }}</td>
+                        <td>{{ a.choix1 }}</td>
+                        <td>{{ a.choix2 }}</td>
+                        <td>{{ a.choix3 }}</td>
+                        <td>{{ a.reponse }}</td>
+                        <td><a href="{{ path('editquestionadmin', {'id': a.id}) }}" class="btn btn-info">Edit</a></td>
+                        <td><a href="{{ path('deletequestionadmin', {'id': a.id}) }}" class="btn btn-danger">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ path('addquestionadmin') }}" class="btn btn-primary">Add Question</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'Admin/base.html.twig' %}
+
+{% block title %}Classes{% endblock %}
+
+{% block content %}
+
+<div class="card">
+    <div class="border-bottom-0 p-0 card-header">
+        <div class="nav-lb-tab nav card-header-undefined" role="tablist">
+            <div class="nav-item">
+                <a role="tab" data-rr-ui-event-key="all" id="react-aria-240-tab-all"
+                    aria-controls="react-aria-240-tabpane-all" aria-selected="true"
+                    class="mb-sm-3 mb-md-0 nav-link active" tabindex="0"
+                    href="{{path('admin.category.show')}}">Go back</a>
+            </div>
+    </div>
+</div>
+    <div class="p-0 card-body">
+        <div class="tab-content">
+            <div style="margin: 50px ;" class="container">
+                <div class="bg-light rounded">
+                    <div class="row g-0">
+                        <div class="col-lg-12 wow fadeIn" data-wow-delay="0.1s"
+                            style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+                            <div class="h-100 d-flex flex-column justify-content-center p-5">
+
+                                <h1 style="margin-left:75px;" class="mb-3">Add a cource</h1>
+                                {{ form_start(f_cours,{'attr': {'novalidate': 'novalidate'}} ) }}
+                    <div class="row g-3">
+                        <div class="col-12 ">
+                            <div class="form-floating">
+                                {{ form_row(f_cours.titre, {'attr': {'class': 'form-control border-0',
+                                'placeholder':'Title'}})
+                                }}
+                        
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                {{ form_row(f_cours.description, {'attr': {'class': 'form-control border-0',
+                                'placeholder':
+                                'Description','style': 'height: 150px'}}) }}
+                               
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                {{ form_row(f_cours.duree, {'attr': {'class': 'form-control border-0',
+                                'placeholder':
+                                'Period in weeks'}}) }}
+                           
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                {{ form_row(f_cours.nbChapitre, {'attr': {'class': 'form-control border-0',
+                                'placeholder':
+                                'Number of chapters'}}) }}
+                                
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                {{ form_row(f_cours.categorie, {'attr': {'class': 'form-control border-0',
+                                'placeholder':
+                                'Categorie'}}) }}
+                            </div>
+                        </div>
+
+                        <div  class="col-sm-12">
+                            {{ form_row(f_cours.save, {'attr': {'class': 'btn btn-primary w-100 py-3','style':'background-color:#103741;color:white'}}) }}
+                        </div>
+                    </div>
+                    {{ form_end(f_cours) }}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
